@@ -1,7 +1,10 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from 'ngx-webstorage';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { LoginRequestPayload } from '../login/login-request.payload';
+import { LoginResponse } from '../login/login-response.payload';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,22 @@ export class AuthService {
   constructor(private httpClient: HttpClient,
     private localStorage: LocalStorageService) { }
 
+    login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
+      return this.httpClient.post<LoginResponse>('http://joaostz.pythonanywhere.com/login',
+        loginRequestPayload).pipe(map(data => {
+          this.localStorage.store('authenticationToken', data.access_token);
+          this.localStorage.store('username', data.nome);
+          this.localStorage.store('expiresAt', data.expiresAt);
+          this.localStorage.store('usuario_id', data.usuario_id);
+  
+          this.loggedIn.emit(true);
+          this.username.emit(data.nome);
+          return true;
+        }));
+    }
+
     logout() {
-      this.httpClient.post('', { responseType: 'text' })
+      this.httpClient.post('http://joaostz.pythonanywhere.com/logout', { responseType: 'text' }, { headers:new HttpHeaders().append('Authorization', `Bearer ` + this.localStorage.retrieve('authenticationToken'))})
         .subscribe(data => {
           console.log(data);
         }, error => {
@@ -24,6 +41,7 @@ export class AuthService {
       this.localStorage.clear('authenticationToken');
       this.localStorage.clear('username');
       this.localStorage.clear('expiresAt');
+      this.localStorage.clear('usuario_id');
     }
 
     getJwtToken() {

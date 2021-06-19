@@ -1,18 +1,27 @@
 <main class="form-signin">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="img-icon">
             <img class="mb-4 " src="https://media-exp1.licdn.com/dms/image/C4D0BAQEAM3zTD1FxUw/company-logo_200_200/0/1622146526438?e=1632355200&v=beta&t=8WomXttfmBxgqO88QztOjNf3PtDPZ9MRVMvqXe_k8e4" alt="" width="100" height="100">
         </div>
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" [formControlName]="'email'" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email</label>
+        <span *ngIf="!loginForm.get('email')?.valid && loginForm.get('email')?.touched">
+          Please provide a valid email
+       </span>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" class="form-control" [formControlName]="'senha'" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Senha</label>
+        <span *ngIf="!loginForm.get('password')?.valid && loginForm.get('password')?.touched">
+          Password cannot be empty
+        </span> 
       </div>
   
       <button class="w-100 btn btn-lg btn-info" type="submit">Sign in</button>
+      <div class="login-failed" *ngIf='this.isError'>
+        <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>   
+      </div>
       <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
     </form>
 </main>
