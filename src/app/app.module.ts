@@ -10,6 +10,7 @@ import { UsuarioRegisterComponent } from './auth/register/usuario-register/usuar
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    UsuarioRegisterComponent
+    UsuarioRegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

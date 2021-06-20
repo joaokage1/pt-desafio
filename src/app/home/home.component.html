@@ -1,0 +1,18 @@
+<div *!ngIf="isLoggedIn"> 
+    <h3 class="inicio">Esta é uma aplicação flask com deploy no heroku</h3>
+</div>
+<div *ngIf="isLoggedIn">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{username}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Endereço</h6>
+          <p class="card-text">País: </p>
+          <p class="card-text">Estado: </p>
+          <p class="card-text">Cidade: </p>
+          <p class="card-text">Rua: </p>
+          <p class="card-text">Número: </p>
+          <p class="card-text">Complemento: </p>
+          <a href="#" class="btn btn-primary">Editar endereço</a>
+        </div>
+    </div>
+</div>

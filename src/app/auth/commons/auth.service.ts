@@ -34,6 +34,7 @@ export class AuthService {
     logout() {
       this.httpClient.post('http://joaostz.pythonanywhere.com/logout', { responseType: 'text' }, { headers:new HttpHeaders().append('Authorization', `Bearer ` + this.localStorage.retrieve('authenticationToken'))})
         .subscribe(data => {
+          this.loggedIn.emit(false);
           console.log(data);
         }, error => {
           throwError(error);
