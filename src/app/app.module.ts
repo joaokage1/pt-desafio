@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HomeComponent } from './home/home.component';
 import { CookieModule } from 'ngx-cookie';
+import { ToastNoAnimationModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CookieModule } from 'ngx-cookie';
     ReactiveFormsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    ToastNoAnimationModule.forRoot()
   ],
   providers: [
   ],

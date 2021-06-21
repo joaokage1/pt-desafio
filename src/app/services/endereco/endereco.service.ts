@@ -14,16 +14,14 @@ export class EnderecoService {
 
   constructor(private httpClient: HttpClient, private localstorage: LocalStorageService, private cookieStorage: CookieService) { }
 
-  cadastrar(enderecoRequest: EnderecoRequestPayload): Observable<boolean> {
+  cadastrar(enderecoRequest: EnderecoRequestPayload): Observable<number> {
     return this.httpClient.post<EnderecoResponsePayload>('http://joaostz.pythonanywhere.com/endereco',
     enderecoRequest).pipe(map(data => {
       if (data.message){
         console.log(data.message)
-        return false;
+        return -1;
       }
-
-      this.localstorage.store('enderecoId',data.id);
-      return true;
+      return data.id;
       }));
   }
 

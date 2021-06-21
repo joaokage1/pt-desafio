@@ -1,1 +1,48 @@
-<p>usuario-register works!</p>
+<main class="form-signin" [formGroup]="usuarioForm" (ngSubmit)="cadastrarPessoa()">
+    <form>
+        <div class="img-icon">
+            <img class="mb-4 " src="https://media-exp1.licdn.com/dms/image/C4D0BAQEAM3zTD1FxUw/company-logo_200_200/0/1622146526438?e=1632355200&v=beta&t=8WomXttfmBxgqO88QztOjNf3PtDPZ9MRVMvqXe_k8e4" alt="" width="100" height="100">
+        </div>
+      <div class="form-floating" >
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'nome'" placeholder="Brasil">
+        <label for="floatingInput">Nome</label>
+        <span class="failed failed-text" *ngIf="!usuarioForm.get('nome')?.valid && usuarioForm.get('nome')?.touched">
+          Nome não pode ser deixado vazio
+        </span>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'email'" placeholder="São Paulo">
+        <label for="floatingInput">Email</label>
+        <span class="failed failed-text" *ngIf="!usuarioForm.get('email')?.valid && usuarioForm.get('email')?.touched">
+          Email não pode ser deixado vazio
+        </span>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'cpf'" placeholder="São Paulo">
+        <label for="floatingInput">CPF</label>
+        <span class="failed failed-text" *ngIf="!usuarioForm.get('cpf')?.valid && usuarioForm.get('cpf')?.touched">
+          CPF não pode ser deixado vazio
+        </span>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'pis'" placeholder="14161314">
+        <label for="floatingInput">PIS</label>
+        <span class="failed failed-text" *ngIf="!usuarioForm.get('pis')?.valid && usuarioForm.get('pis')?.touched">
+          PIS não pode ser deixado vazio
+        </span>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingInput" [formControlName]="'senha'" placeholder="14161314">
+        <label for="floatingInput">Senha</label>
+        <span class="failed failed-text" *ngIf="!usuarioForm.get('senha')?.valid && usuarioForm.get('senha')?.touched">
+        Senha não pode ser deixada vazia
+        </span>
+      </div>
+  
+      <button class="w-100 btn btn-lg btn-info" type="submit" >Cadastrar</button>
+      <div class="failed" *ngIf='this.isError'>
+        <p class="failed-text">Cadastrar o usuario falhou, verifique todos os campos e tente novamente.</p>   
+      </div>
+      <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+    </form>
+</main>

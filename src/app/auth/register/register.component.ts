@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { throwError } from 'rxjs';
 import { EnderecoRequestPayload } from 'src/app/services/endereco/endereco.request';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   enderecoRequest: EnderecoRequestPayload;
   isError: boolean = false;
 
-  constructor(private enderecoService: EnderecoService, private router: Router) { 
+  constructor( private router: Router, private localStorage: LocalStorageService) { 
     this.enderecoRequest = {
       pais: '',
       estado: '',
@@ -56,14 +57,9 @@ export class RegisterComponent implements OnInit {
       this.enderecoRequest.rua = this.enderecoForm.get('rua')?.value;
       this.enderecoRequest.numero = this.enderecoForm.get('numero')?.value;
       this.enderecoRequest.complemento = this.enderecoForm.get('complemento')?.value;
-  
-      this.enderecoService.cadastrar(this.enderecoRequest).subscribe(data=> {
-        this.isError = false;
-        this.router.navigateByUrl('signup-user');
-      }, error => {
-        this.isError = true;
-        throwError(error) 
-      });
+
+      this.localStorage.store('enderecoRequest', this.enderecoRequest)
+      this.router.navigateByUrl('signup-user');
     }
   }
 

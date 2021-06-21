@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie';
+import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'ngx-webstorage';
 import { throwError } from 'rxjs';
 import { AuthService } from '../auth/commons/auth.service';
@@ -28,7 +29,8 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router
     , private authService: AuthService
     , private usuarioService: UsuarioService
-    , private cookieStorage: CookieService) { }
+    , private cookieStorage: CookieService
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
@@ -54,7 +56,9 @@ export class HomeComponent implements OnInit {
         this.complemento = data.usuario.endereco.complemento;
       }
     }, error => {
-      throwError(error)
+      this.toastr.error('Cadastro', error.error.message, {
+        timeOut: 4000,
+      });
     });
   }
 
