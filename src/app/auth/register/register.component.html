@@ -1,38 +1,59 @@
-<main class="form-signin">
+<main class="form-signin" [formGroup]="enderecoForm" (ngSubmit)="cadastrar()">
     <form>
         <div class="img-icon">
             <img class="mb-4 " src="https://media-exp1.licdn.com/dms/image/C4D0BAQEAM3zTD1FxUw/company-logo_200_200/0/1622146526438?e=1632355200&v=beta&t=8WomXttfmBxgqO88QztOjNf3PtDPZ9MRVMvqXe_k8e4" alt="" width="100" height="100">
         </div>
       <div class="form-floating" >
-        <input type="text" class="form-control" id="floatingInput" placeholder="Brasil">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'pais'" placeholder="Brasil">
         <label for="floatingInput">País</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('pais')?.valid && enderecoForm.get('pais')?.touched">
+          País não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="São Paulo">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'estado'" placeholder="São Paulo">
         <label for="floatingInput">Estado</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('estado')?.valid && enderecoForm.get('estado')?.touched">
+          Estado não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="São Paulo">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'municipio'" placeholder="São Paulo">
         <label for="floatingInput">Município</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('municipio')?.valid && enderecoForm.get('municipio')?.touched">
+          Município não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating">
-        <input type="number" class="form-control" id="floatingInput" placeholder="14161314">
+        <input type="number" class="form-control" id="floatingInput" [formControlName]="'cep'" placeholder="14161314">
         <label for="floatingInput">CEP</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('cep')?.valid && enderecoForm.get('cep')?.touched">
+          CEP não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Rua dos lamentos">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'rua'" placeholder="Rua dos lamentos">
         <label for="floatingInput">Rua</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('rua')?.valid && enderecoForm.get('rua')?.touched">
+          Rua não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating">
-        <input type="number" class="form-control" id="floatingInput" placeholder="34">
+        <input type="number" class="form-control" id="floatingInput" [formControlName]="'numero'" placeholder="34">
         <label for="floatingPassword">Número</label>
+        <span class="failed failed-text" *ngIf="!enderecoForm.get('numero')?.valid && enderecoForm.get('numero')?.touched">
+          Numero não pode ser deixado vazio
+        </span>
       </div>
       <div class="form-floating ultimo"> 
-        <input type="text" class="form-control" id="floatingInput" placeholder="...">
+        <input type="text" class="form-control" id="floatingInput" [formControlName]="'complemento'" placeholder="...">
         <label for="floatingPassword">Complemento</label>
       </div>
   
       <button class="w-100 btn btn-lg btn-info" type="submit" >Registrar</button>
+      <div class="failed" *ngIf='this.isError'>
+        <p class="failed-text">Cadastrar o endereço falhou, verifique todos os campos e tente novamente.</p>   
+      </div>
       <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
     </form>
 </main>
