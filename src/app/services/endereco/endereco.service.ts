@@ -37,5 +37,17 @@ export class EnderecoService {
       }));
   }
 
+  atualizar(enderecoRequest: EnderecoRequestPayload,id: number): Observable<EnderecoResponsePayload> {
+    return this.httpClient.put<EnderecoResponsePayload>('http://joaostz.pythonanywhere.com/endereco/' + id, enderecoRequest, { headers:new HttpHeaders().append('Authorization', `Bearer ` + this.cookieStorage.get('authenticationToken'))}).pipe(map(data => {
+      if (data.message){
+        console.log(data.message)
+        return data;
+      }
+
+      console.log(data)
+      return data;
+      }));
+  }
+
   
 }

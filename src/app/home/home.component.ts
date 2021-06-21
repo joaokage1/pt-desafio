@@ -54,9 +54,10 @@ export class HomeComponent implements OnInit {
         this.numero = data.usuario.endereco.numero;
         this.cep = data.usuario.endereco.cep;
         this.complemento = data.usuario.endereco.complemento;
+        this.cookieStorage.put('endereco_id', String(data.usuario.endereco.id))
       }
     }, error => {
-      this.toastr.error('Cadastro', error.error.message, {
+      this.toastr.error('Home', error.error.message, {
         timeOut: 4000,
       });
     });

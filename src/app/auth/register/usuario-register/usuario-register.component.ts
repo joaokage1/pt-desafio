@@ -92,7 +92,9 @@ export class UsuarioRegisterComponent implements OnInit {
         }
       }, error => {
         this.isError = true;
-        throwError(error) 
+            this.toastr.error('Cadastro', error.error.message, {
+              timeOut: 4000,
+        });
       });
 
     }

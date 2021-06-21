@@ -13,6 +13,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
 import { HomeComponent } from './home/home.component';
 import { CookieModule } from 'ngx-cookie';
 import { ToastNoAnimationModule } from 'ngx-toastr';
+import { EnderecoComponent } from './endereco/endereco.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ToastNoAnimationModule } from 'ngx-toastr';
     LoginComponent,
     RegisterComponent,
     UsuarioRegisterComponent,
-    HomeComponent
+    HomeComponent,
+    EnderecoComponent
   ],
   imports: [
     BrowserModule,

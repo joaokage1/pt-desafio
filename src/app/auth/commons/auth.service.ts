@@ -5,6 +5,7 @@ import { LoginRequestPayload } from '../login/login-request.payload';
 import { LoginResponse } from '../login/login-response.payload';
 import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthService {
   @Output() username: EventEmitter<string> = new EventEmitter();
 
   constructor(private httpClient: HttpClient,
-    private cookieStorage: CookieService) { }
+    private cookieStorage: CookieService,
+    private toastr: ToastrService) { }
 
     login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
       return this.httpClient.post<LoginResponse>('http://joaostz.pythonanywhere.com/login',
@@ -34,13 +36,16 @@ export class AuthService {
       this.httpClient.post('http://joaostz.pythonanywhere.com/logout', { responseType: 'text' }, { headers:new HttpHeaders().append('Authorization', `Bearer ` + this.cookieStorage.get('authenticationToken'))})
         .subscribe(data => {
           this.loggedIn.emit(false);
-          console.log(data);
+          this.toastr.success('Deslogado', 'Até mais, volte logo', {
+            timeOut: 4000,
+          });
         }, error => {
           throwError(error);
         })
       this.cookieStorage.remove('authenticationToken');
       this.cookieStorage.remove('username');
       this.cookieStorage.remove('usuario_id');
+      this.cookieStorage.remove('endereco_id');
     }
 
     getJwtToken() {
