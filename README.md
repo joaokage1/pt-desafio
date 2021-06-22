@@ -1,27 +1,34 @@
-# PtDesafio
+# Desafio Front-End
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
+Este é o FE do desafio para cadastro de usuário WEB.
+Foi desenvolvido com Angular.
+<p align="center">
+  <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="angular-logo" width="120px" height="120px"/>
+</p>
 
-## Development server
+Para rodar basta fazer o clone do projeto e rodar os seguintes comandos:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Nota: Certifique-se de ter o Node.js no seu computador.
 
-## Code scaffolding
+Ir para pasta do projeto clonado
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`cd /pastaDoProjeto`
 
-## Build
+Fazer download das dependências usadas no projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+`npm install`
 
-## Running unit tests
+Subir aplicação local (http://localhost:4200/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`ng serve`
 
-## Running end-to-end tests
+Após subir localmente, a aplicação pode ser usada normalmente, pois a API do BE está deployada no pythonanywhere.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Principais dependências utilizadas:
+ - FormControl
+ - ToastrService
+ - LocalStorageService
+ - CookieService
+ 
+ 
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
