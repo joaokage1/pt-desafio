@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
 import { AuthService } from '../commons/auth.service';
 import { LoginRequestPayload } from './login-request.payload';
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   isError: boolean = false;
 
   constructor(private authService: AuthService,
-    private router: Router) { 
+    private router: Router,
+    private toastr: ToastrService) { 
       this.loginRequestPayload = {
         email: '',
         senha: ''
@@ -40,6 +42,9 @@ export class LoginComponent implements OnInit {
       this.isError = false;
       this.router.navigateByUrl('');
     }, error => {
+      this.toastr.error('Login', 'Verifique os campos e tente novamente', {
+        timeOut: 4000,
+      });
       this.isError = true;
       throwError(error);
     });

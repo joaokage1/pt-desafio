@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 import { AuthService } from '../auth/commons/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   username: string = "";
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private cookieStorage: CookieService) { }
 
   ngOnInit(): void {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
@@ -24,6 +25,11 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
+    this.router.navigateByUrl('/');
+  }
+
+  excluir(){
+    this.authService.deletar(Number(this.cookieStorage.get('usuario_id')));
     this.router.navigateByUrl('/');
   }
 

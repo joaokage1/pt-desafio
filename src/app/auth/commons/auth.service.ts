@@ -48,6 +48,25 @@ export class AuthService {
       this.cookieStorage.remove('endereco_id');
     }
 
+    deletar(id: number) {
+      this.httpClient.delete('http://joaostz.pythonanywhere.com/usuarios/' + id, { headers:new HttpHeaders().append('Authorization', `Bearer ` + this.cookieStorage.get('authenticationToken')), responseType: 'text'})
+        .subscribe(data => {
+          this.loggedIn.emit(false);
+          this.toastr.success('Deslogado', 'Até mais, volte logo', {
+            timeOut: 4000,
+          });
+        }, error => {
+          this.loggedIn.emit(false);
+          this.toastr.success('Deslogado', 'Até mais, volte logo', {
+            timeOut: 4000,
+          });
+        });
+      this.cookieStorage.remove('authenticationToken');
+      this.cookieStorage.remove('username');
+      this.cookieStorage.remove('usuario_id');
+      this.cookieStorage.remove('endereco_id');
+    }
+
     getJwtToken() {
       return this.cookieStorage.get('authenticationToken');
     }

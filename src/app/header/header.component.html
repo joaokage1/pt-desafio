@@ -19,7 +19,8 @@
         <div *ngIf="isLoggedIn">
             <div class="text-start">
                 Bem vindo <strong>{{username}}</strong>
-                <button type="button" class="btn btn-dark me-2 text" (click)="logout()">Logout</button> <!--  -->
+                <button type="button" class="btn btn-dark me-2 text" (click)="logout()">Logout</button> 
+                <button type="button" class="btn btn-danger me-2 text" (click)="excluir()">Excluir Usuário</button>
             </div>
         </div>  
         <div *ngIf="!isLoggedIn">
